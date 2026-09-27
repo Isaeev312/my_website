@@ -36,6 +36,10 @@
       });
     });
 
+    document.querySelectorAll("[data-print-page]").forEach(function (button) {
+      button.addEventListener("click", function () { window.print(); });
+    });
+
     // --- Мобильное меню ---
     const toggle = document.querySelector(".nav-toggle");
     const nav = document.querySelector(".nav");

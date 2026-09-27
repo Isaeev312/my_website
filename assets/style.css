@@ -341,6 +341,9 @@ details[open] summary::after { content: "−"; }
   .header, .footer, .nav-toggle, .icon-btn { display: none !important; }
   body { background: #fff; color: #000; }
   .back-to-top { display: none !important; }
+  .toc, .calc-state, .result-actions, .formula { display: none !important; }
+  .page-head { padding: 0 0 12px; }
+  .card { box-shadow: none; break-inside: avoid; }
 }
 
 @media (prefers-reduced-motion: reduce) {
