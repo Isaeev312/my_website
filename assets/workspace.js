@@ -60,7 +60,12 @@
         const edit = document.createElement("button"); edit.type = "button"; edit.className = "workspace-action"; edit.textContent = "Изменить";
         edit.addEventListener("click", function () { startEdit(item); });
         const remove = document.createElement("button"); remove.type = "button"; remove.className = "workspace-remove"; remove.textContent = "×"; remove.title = "Удалить проект"; remove.setAttribute("aria-label", "Удалить проект " + item.name);
-        remove.addEventListener("click", function () { items = items.filter(function (entry) { return entry.id !== item.id; }); save(items); render(); });
+        remove.addEventListener("click", function () {
+          if (!window.confirm("Удалить проект «" + item.name + "» из этого браузера?")) return;
+          items = items.filter(function (entry) { return entry.id !== item.id; });
+          if (editingId === item.id) resetForm();
+          save(items); status.textContent = "Проект удалён"; render();
+        });
         controls.append(stage, edit, remove); top.append(title, controls); article.appendChild(top);
         const details = document.createElement("div"); details.className = "workspace-item__details";
         const due = document.createElement("span"); due.textContent = (late(item) ? "Просрочен: " : "Срок: ") + dateLabel(item.deadline);
