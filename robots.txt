@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aidar-isaev-engineering.isaeev312.chatgpt.site/sitemap.xml
