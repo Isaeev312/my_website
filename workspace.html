@@ -54,6 +54,7 @@
 
       <div>
         <div class="workspace-toolbar">
+          <div class="field workspace-search"><label for="ws-search">Поиск</label><input id="ws-search" type="search" placeholder="Объект, заказчик, задача" data-workspace-search></div>
           <div class="field"><label for="ws-filter">Показать</label><select id="ws-filter" data-workspace-filter><option value="all">Все проекты</option><option value="active">В работе</option><option value="upcoming">Ближайшие 7 дней</option><option value="late">Просроченные</option><option value="done">Завершённые</option></select></div>
           <div class="btn-row"><button class="btn btn--ghost" type="button" data-workspace-export>Экспорт CSV</button><button class="btn btn--ghost" type="button" data-workspace-backup>Резервная копия</button><button class="btn btn--ghost" type="button" data-workspace-import>Восстановить</button><button class="btn btn--ghost" type="button" data-workspace-clear>Очистить список</button><input type="file" accept="application/json,.json" data-workspace-file hidden></div>
         </div>

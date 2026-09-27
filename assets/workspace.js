@@ -19,6 +19,7 @@
     const empty = document.querySelector("[data-workspace-empty]");
     const summary = document.querySelector("[data-workspace-summary]");
     const filter = document.querySelector("[data-workspace-filter]");
+    const search = document.querySelector("[data-workspace-search]");
     const status = document.querySelector("[data-workspace-status]");
     const importFile = document.querySelector("[data-workspace-file]");
     const formTitle = document.querySelector("[data-workspace-form-title]");
@@ -49,8 +50,10 @@
     }
     function render() {
       const mode = filter.value;
+      const query = search.value.trim().toLowerCase();
       const shown = items.filter(function (item) {
-        return mode === "all" || (mode === "active" && item.stage !== "Завершён") || (mode === "upcoming" && upcoming(item)) || (mode === "done" && item.stage === "Завершён") || (mode === "late" && late(item));
+        const matches = !query || [item.name, item.client, item.next, item.kind, item.stage].join(" ").toLowerCase().includes(query);
+        return matches && (mode === "all" || (mode === "active" && item.stage !== "Завершён") || (mode === "upcoming" && upcoming(item)) || (mode === "done" && item.stage === "Завершён") || (mode === "late" && late(item)));
       }).sort(function (a, b) {
         const aDone = a.stage === "Завершён";
         const bDone = b.stage === "Завершён";
@@ -103,6 +106,7 @@
     });
     cancel.addEventListener("click", function () { resetForm(); status.textContent = "Изменения отменены"; });
     filter.addEventListener("change", render);
+    search.addEventListener("input", render);
     document.querySelector("[data-workspace-clear]").addEventListener("click", function () { if (items.length && window.confirm("Удалить все проекты из этого браузера?")) { items = []; save(items); render(); } });
     document.querySelector("[data-workspace-export]").addEventListener("click", function () {
       const escape = function (value) { return '"' + String(value || "").replace(/"/g, '""') + '"'; };

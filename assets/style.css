@@ -348,6 +348,7 @@ details[open] summary::after { content: "−"; }
 .workspace-form { box-shadow: none; }
 .workspace-toolbar { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px; }
 .workspace-toolbar .field { width: 180px; }
+.workspace-toolbar .workspace-search { flex: 1; min-width: 220px; }
 .workspace-item { padding: 16px; box-shadow: none; }
 .workspace-item + .workspace-item { margin-top: 10px; }
 .workspace-item--late { border-left: 4px solid var(--warn-border); }
