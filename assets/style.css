@@ -274,6 +274,9 @@ td code { white-space: nowrap; }
 .result__row b { font-family: var(--mono); font-weight: 600; text-align: right; }
 .result__row--main b { color: var(--accent); font-size: 1.15rem; }
 .formula { font-family: var(--mono); font-size: .85rem; color: var(--muted); margin-top: 12px; line-height: 1.7; }
+.result-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 14px; }
+.result-actions .btn { padding: 8px 12px; font-size: .9rem; }
+.result-actions__status { color: var(--ok); font-size: .9rem; min-height: 1.5em; }
 .status { font-size: .9rem; padding: 8px 12px; border-radius: 8px; }
 .status--ok { background: color-mix(in srgb, var(--ok) 14%, transparent); color: var(--ok); }
 .status--warn { background: var(--warn-bg); border: 1px solid var(--warn-border); }

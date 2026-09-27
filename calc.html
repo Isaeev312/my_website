@@ -102,6 +102,10 @@
           </div>
         </div>
         <p class="status status--warn" id="p-status" hidden aria-live="polite"></p>
+        <div class="result-actions">
+          <button class="btn btn--ghost" type="button" data-copy-result="#pipe .result">Скопировать результат</button>
+          <span class="result-actions__status" data-copy-status aria-live="polite"></span>
+        </div>
         <div class="formula">
           v = 4q / (π·d²) · Re = v·d / ν · ν = 1,78·10⁻⁶ / (1 + 0,0337t + 0,000221t²)<br>
           λ: Re &lt; 2300 → 64/Re, иначе Коулбрук–Уайт: 1/√λ = −2·lg(Δ/(3,7d) + 2,51/(Re·√λ))<br>
@@ -125,6 +129,10 @@
           </div>
         </div>
         <p class="status status--warn" id="d-status" hidden aria-live="polite"></p>
+        <div class="result-actions">
+          <button class="btn btn--ghost" type="button" data-copy-result="#diam .result">Скопировать результат</button>
+          <span class="result-actions__status" data-copy-status aria-live="polite"></span>
+        </div>
         <div class="formula">d = √(4q / (π·v)). Для точного подбора подставьте в ряд реальные внутренние диаметры выбранных труб (с учётом SDR / толщины стенки).</div>
       </div>
 
@@ -155,6 +163,10 @@
           </div>
         </div>
         <p class="status status--warn" id="g-status" hidden aria-live="polite"></p>
+        <div class="result-actions">
+          <button class="btn btn--ghost" type="button" data-copy-result="#gravity .result">Скопировать результат</button>
+          <span class="result-actions__status" data-copy-status aria-live="polite"></span>
+        </div>
         <div class="formula">
           θ = 2·arccos(1 − 2h/d) · ω = d²/8 · (θ − sin θ) · χ = d·θ/2 · R = ω/χ<br>
           v = (1/n) · R^(2/3) · i^(1/2)  (формула Маннинга) · q = v·ω<br>
@@ -178,6 +190,10 @@
           </div>
         </div>
         <p class="status status--warn" id="w-status" hidden aria-live="polite"></p>
+        <div class="result-actions">
+          <button class="btn btn--ghost" type="button" data-copy-result="#daily .result">Скопировать результат</button>
+          <span class="result-actions__status" data-copy-status aria-live="polite"></span>
+        </div>
         <div class="formula">Qсут = q·U / 1000 · Qср.ч = Qсут / T. Норму водопотребления принимайте по СП 30.13330 для конкретного типа потребителя. Максимальные расходы считаются с коэффициентами неравномерности — они здесь не учтены.</div>
       </div>
 

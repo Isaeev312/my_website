@@ -190,6 +190,26 @@
         }
       });
     });
+
+    document.querySelectorAll("[data-copy-result]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        const result = document.querySelector(button.getAttribute("data-copy-result"));
+        const status = button.parentElement.querySelector("[data-copy-status]");
+        if (!result) return;
+        const lines = Array.from(result.querySelectorAll(".result__row")).map(function (row) {
+          const label = row.querySelector("span");
+          const value = row.querySelector("b");
+          return label.textContent.trim() + ": " + value.textContent.trim();
+        });
+        const copied = navigator.clipboard && navigator.clipboard.writeText
+          ? navigator.clipboard.writeText(lines.join("\n")) : Promise.reject();
+        copied.then(function () {
+          if (status) status.textContent = "Результат скопирован";
+        }).catch(function () {
+          if (status) status.textContent = "Не удалось скопировать результат";
+        });
+      });
+    });
   });
 
   // Экспорт для проверки из консоли
