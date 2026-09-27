@@ -248,6 +248,9 @@ td code { white-space: nowrap; }
 
 /* ===== Калькуляторы ===== */
 .calc-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.calc-state { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 14px; }
+.calc-state .btn { padding: 8px 12px; font-size: .9rem; }
+.calc-state span { color: var(--ok); font-size: .9rem; min-height: 1.5em; }
 .calc { scroll-margin-top: 84px; }
 .calc + .calc { margin-top: 24px; }
 .calc__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }

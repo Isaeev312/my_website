@@ -164,6 +164,32 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    // Сохраняем только введённые значения, без результатов расчёта.
+    const stateKey = "vk-nvk-calculator-inputs";
+    const fields = Array.from(document.querySelectorAll(".calc input"));
+    function saveCalculatorState() {
+      const state = {};
+      fields.forEach(function (field) { state[field.id] = field.value; });
+      try { localStorage.setItem(stateKey, JSON.stringify(state)); } catch (e) { /* приватный режим */ }
+    }
+    try {
+      const saved = JSON.parse(localStorage.getItem(stateKey) || "{}");
+      fields.forEach(function (field) {
+        if (typeof saved[field.id] === "string") field.value = saved[field.id];
+      });
+    } catch (e) { /* повреждённые или недоступные данные */ }
+    fields.forEach(function (field) { field.addEventListener("input", saveCalculatorState); });
+    const resetAll = document.querySelector("[data-reset-calculators]");
+    const stateStatus = document.querySelector("[data-calc-state-status]");
+    if (resetAll) resetAll.addEventListener("click", function () {
+      fields.forEach(function (field) {
+        field.value = field.defaultValue;
+        field.dispatchEvent(new Event("input"));
+      });
+      try { localStorage.removeItem(stateKey); } catch (e) { /* приватный режим */ }
+      if (stateStatus) stateStatus.textContent = "Исходные значения восстановлены";
+    });
+
     Object.keys(FLOW_UNITS).forEach(function (k) {
       const el = document.getElementById("u-" + k);
       if (el) el.addEventListener("input", function () { calcUnits(k); });
