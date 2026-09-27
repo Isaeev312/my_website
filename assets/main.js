@@ -128,6 +128,11 @@
           status.textContent = "Скопируйте текст через Telegram";
         });
       });
+      const emailButton = briefForm.querySelector("[data-brief-email]");
+      if (emailButton) emailButton.addEventListener("click", function () {
+        window.location.href = "mailto:isaeev312@gmail.com?subject=" + encodeURIComponent("Запрос по проекту ВК/НВК") +
+          "&body=" + encodeURIComponent(briefText());
+      });
     }
 
     // --- Интерактивные чек-листы обучения ---
