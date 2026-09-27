@@ -1,6 +1,7 @@
 (function () {
   const KEY = "vk-nvk-project-workspace";
   const stages = ["Исходные данные", "Расчёты", "Увязка", "Выпуск", "Замечания", "Завершён"];
+  const taskLabels = ["Исходные данные", "Расчёты", "Увязка", "Выдача"];
   function read() { try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch (e) { return []; } }
   function save(items) { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) { /* приватный режим */ } }
   function dateLabel(value) {
@@ -98,6 +99,17 @@
         const due = document.createElement("span"); due.textContent = "Срок: " + dateLabel(item.deadline);
         const next = document.createElement("span"); next.textContent = item.next || "Следующий шаг не указан";
         details.append(due, next); article.appendChild(details); list.appendChild(article);
+        const tasks = Array.isArray(item.tasks) ? item.tasks : [];
+        const checklist = document.createElement("div"); checklist.className = "workspace-checklist";
+        const completed = tasks.filter(Boolean).length;
+        const caption = document.createElement("span"); caption.textContent = completed + " / " + taskLabels.length + " шагов"; checklist.appendChild(caption);
+        taskLabels.forEach(function (label, index) {
+          const labelEl = document.createElement("label");
+          const input = document.createElement("input"); input.type = "checkbox"; input.checked = Boolean(tasks[index]);
+          input.addEventListener("change", function () { item.tasks = taskLabels.map(function (_, taskIndex) { return taskIndex === index ? input.checked : Boolean(tasks[taskIndex]); }); save(items); render(); });
+          labelEl.append(input, document.createTextNode(label)); checklist.appendChild(labelEl);
+        });
+        article.appendChild(checklist);
       });
       empty.hidden = shown.length !== 0;
       const active = items.filter(function (item) { return item.stage !== "Завершён"; }).length;
@@ -108,7 +120,8 @@
       event.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
       const data = new FormData(form);
-      const project = { id: editingId || Date.now(), name: data.get("name").trim(), kind: data.get("kind"), stage: data.get("stage"), deadline: data.get("deadline"), client: data.get("client").trim(), next: data.get("next").trim() };
+      const existing = items.find(function (item) { return item.id === editingId; });
+      const project = { id: editingId || Date.now(), name: data.get("name").trim(), kind: data.get("kind"), stage: data.get("stage"), deadline: data.get("deadline"), client: data.get("client").trim(), next: data.get("next").trim(), tasks: existing && Array.isArray(existing.tasks) ? existing.tasks : [] };
       if (editingId) items = items.map(function (item) { return item.id === editingId ? project : item; });
       else items.unshift(project);
       save(items); status.textContent = editingId ? "Изменения сохранены" : "Проект добавлен"; resetForm(); render();
@@ -142,7 +155,7 @@
           const data = JSON.parse(String(reader.result));
           const projects = Array.isArray(data.projects) ? data.projects : null;
           if (!projects || projects.some(function (item) { return !item || typeof item.name !== "string" || !stages.includes(item.stage); })) throw new Error("invalid");
-          items = projects.map(function (item) { return { id: item.id || Date.now() + Math.random(), name: item.name, kind: item.kind || "ВК", stage: item.stage, deadline: item.deadline || "", client: item.client || "", next: item.next || "" }; });
+          items = projects.map(function (item) { return { id: item.id || Date.now() + Math.random(), name: item.name, kind: item.kind || "ВК", stage: item.stage, deadline: item.deadline || "", client: item.client || "", next: item.next || "", tasks: Array.isArray(item.tasks) ? item.tasks : [] }; });
           save(items); resetForm(); render(); status.textContent = "Резервная копия восстановлена";
         } catch (e) { status.textContent = "Не удалось прочитать резервную копию"; }
         importFile.value = "";
