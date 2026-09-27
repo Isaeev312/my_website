@@ -95,6 +95,7 @@
     const v = num("d-v");
     if (!positive(Q, v)) {
       set("d-d", "—"); set("d-dn", "—"); set("d-vreal", "—");
+      delete document.getElementById("d-dn").dataset.diameter;
       setStatus("d-status", "Введите положительные расход и целевую скорость.");
       return;
     }
@@ -109,9 +110,11 @@
     if (pick) {
       const vReal = Q / (Math.PI * Math.pow(pick / 1000, 2) / 4);
       set("d-dn", fmt(pick, 1) + " мм");
+      document.getElementById("d-dn").dataset.diameter = String(pick);
       set("d-vreal", fmt(vReal, 3) + " м/с");
     } else {
       set("d-dn", "нет в ряду");
+      delete document.getElementById("d-dn").dataset.diameter;
       set("d-vreal", "—");
       setStatus("d-status", "В указанном ряду нет диаметра, достаточного для расчётного расхода.");
     }
@@ -235,6 +238,25 @@
           if (status) status.textContent = "Не удалось скопировать результат";
         });
       });
+    });
+
+    const useDiameter = document.querySelector("[data-use-diameter]");
+    if (useDiameter) useDiameter.addEventListener("click", function () {
+      const selected = document.getElementById("d-dn").dataset.diameter;
+      const flow = document.getElementById("d-q").value;
+      const pipeFlow = document.getElementById("p-q");
+      const pipeDiameter = document.getElementById("p-d");
+      const status = useDiameter.parentElement.querySelector("[data-copy-status]");
+      if (!selected || !pipeFlow || !pipeDiameter) {
+        if (status) status.textContent = "Сначала подберите диаметр из ряда";
+        return;
+      }
+      pipeFlow.value = flow;
+      pipeDiameter.value = selected;
+      pipeFlow.dispatchEvent(new Event("input"));
+      pipeDiameter.dispatchEvent(new Event("input"));
+      document.getElementById("pipe").scrollIntoView({ behavior: "smooth", block: "start" });
+      if (status) status.textContent = "Диаметр перенесён в расчёт потерь";
     });
   });
 
