@@ -208,6 +208,16 @@ a.card:hover { text-decoration: none; transform: translateY(-2px); border-color:
   border-radius: 6px; padding: 0 6px; font-family: var(--mono); font-size: .88em;
 }
 
+.about-facts {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px;
+}
+.about-facts div {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+}
+.about-facts h3 { font-size: 1rem; margin-bottom: .35em; }
+.about-facts p { font-size: .95rem; margin: 0; }
+@media (max-width: 620px) { .about-facts { grid-template-columns: 1fr; } }
+
 /* ===== Таблицы ===== */
 .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
 table { width: 100%; border-collapse: collapse; font-size: .95rem; }
