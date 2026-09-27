@@ -172,5 +172,22 @@
         updateProgress();
       });
     });
+
+    // --- Возврат к началу длинной страницы ---
+    const topButton = document.createElement("button");
+    topButton.className = "back-to-top";
+    topButton.type = "button";
+    topButton.textContent = "↑";
+    topButton.hidden = true;
+    topButton.setAttribute("aria-label", "Наверх");
+    topButton.title = "Наверх";
+    document.body.appendChild(topButton);
+    function updateTopButton() { topButton.hidden = window.scrollY < 600; }
+    window.addEventListener("scroll", updateTopButton, { passive: true });
+    topButton.addEventListener("click", function () {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+    });
+    updateTopButton();
   });
 })();
