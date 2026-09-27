@@ -113,5 +113,29 @@
         });
       });
     }
+
+    // --- Интерактивные чек-листы обучения ---
+    document.querySelectorAll("[data-checklist]").forEach(function (list) {
+      const name = list.getAttribute("data-checklist");
+      const key = "checklist-" + name;
+      const inputs = Array.from(list.querySelectorAll('input[type="checkbox"]'));
+      let savedChecks = [];
+      try { savedChecks = JSON.parse(localStorage.getItem(key) || "[]"); } catch (e) { savedChecks = []; }
+      inputs.forEach(function (input, index) {
+        input.checked = savedChecks.indexOf(index) !== -1;
+        input.addEventListener("change", function () {
+          const checked = inputs.reduce(function (result, item, itemIndex) {
+            if (item.checked) result.push(itemIndex);
+            return result;
+          }, []);
+          try { localStorage.setItem(key, JSON.stringify(checked)); } catch (e) { /* приватный режим */ }
+        });
+      });
+      const reset = document.querySelector('[data-checklist-reset="' + name + '"]');
+      if (reset) reset.addEventListener("click", function () {
+        inputs.forEach(function (input) { input.checked = false; });
+        try { localStorage.removeItem(key); } catch (e) { /* приватный режим */ }
+      });
+    });
   });
 })();
