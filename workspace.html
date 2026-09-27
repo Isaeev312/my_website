@@ -39,7 +39,7 @@
       <aside class="workspace-panel">
         <div class="workspace-summary" data-workspace-summary aria-live="polite"></div>
         <form class="card workspace-form" data-workspace-form>
-          <h2>Новый проект</h2>
+          <h2 data-workspace-form-title>Новый проект</h2>
           <div class="fields">
             <div class="field field--full"><label for="ws-name">Объект</label><input id="ws-name" name="name" type="text" placeholder="Например: жилой дом, Бишкек" required></div>
             <div class="field"><label for="ws-kind">Раздел</label><select id="ws-kind" name="kind"><option>ВК</option><option>НВК</option><option>ВК и НВК</option><option>Консультация</option></select></div>
@@ -48,7 +48,7 @@
             <div class="field"><label for="ws-client">Заказчик</label><input id="ws-client" name="client" type="text" placeholder="Необязательно"></div>
             <div class="field field--full"><label for="ws-next">Следующий шаг</label><textarea id="ws-next" name="next" rows="3" placeholder="Например: запросить ТУ и архитектурные планы"></textarea></div>
           </div>
-          <div class="brief-form__actions"><button class="btn btn--primary" type="submit">Добавить проект</button><span data-workspace-status aria-live="polite"></span></div>
+          <div class="brief-form__actions"><button class="btn btn--primary" type="submit" data-workspace-submit>Добавить проект</button><button class="btn btn--ghost" type="button" data-workspace-cancel hidden>Отменить</button><span data-workspace-status aria-live="polite"></span></div>
         </form>
       </aside>
 

@@ -13,7 +13,32 @@
     const summary = document.querySelector("[data-workspace-summary]");
     const filter = document.querySelector("[data-workspace-filter]");
     const status = document.querySelector("[data-workspace-status]");
+    const formTitle = document.querySelector("[data-workspace-form-title]");
+    const submit = document.querySelector("[data-workspace-submit]");
+    const cancel = document.querySelector("[data-workspace-cancel]");
     let items = read();
+    let editingId = null;
+    function resetForm() {
+      editingId = null;
+      form.reset();
+      formTitle.textContent = "Новый проект";
+      submit.textContent = "Добавить проект";
+      cancel.hidden = true;
+    }
+    function startEdit(item) {
+      editingId = item.id;
+      form.elements.name.value = item.name;
+      form.elements.kind.value = item.kind;
+      form.elements.stage.value = item.stage;
+      form.elements.deadline.value = item.deadline;
+      form.elements.client.value = item.client;
+      form.elements.next.value = item.next;
+      formTitle.textContent = "Изменить проект";
+      submit.textContent = "Сохранить изменения";
+      cancel.hidden = false;
+      form.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+      form.elements.name.focus();
+    }
     function render() {
       const mode = filter.value;
       const shown = items.filter(function (item) {
@@ -31,9 +56,11 @@
         const stage = document.createElement("select"); stage.setAttribute("aria-label", "Стадия проекта " + item.name);
         stages.forEach(function (value) { const option = document.createElement("option"); option.value = value; option.textContent = value; option.selected = value === item.stage; stage.appendChild(option); });
         stage.addEventListener("change", function () { item.stage = stage.value; save(items); render(); });
+        const edit = document.createElement("button"); edit.type = "button"; edit.className = "workspace-action"; edit.textContent = "Изменить";
+        edit.addEventListener("click", function () { startEdit(item); });
         const remove = document.createElement("button"); remove.type = "button"; remove.className = "workspace-remove"; remove.textContent = "×"; remove.title = "Удалить проект"; remove.setAttribute("aria-label", "Удалить проект " + item.name);
         remove.addEventListener("click", function () { items = items.filter(function (entry) { return entry.id !== item.id; }); save(items); render(); });
-        controls.append(stage, remove); top.append(title, controls); article.appendChild(top);
+        controls.append(stage, edit, remove); top.append(title, controls); article.appendChild(top);
         const details = document.createElement("div"); details.className = "workspace-item__details";
         const due = document.createElement("span"); due.textContent = (late(item) ? "Просрочен: " : "Срок: ") + dateLabel(item.deadline);
         const next = document.createElement("span"); next.textContent = item.next || "Следующий шаг не указан";
@@ -48,9 +75,12 @@
       event.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
       const data = new FormData(form);
-      items.unshift({ id: Date.now(), name: data.get("name").trim(), kind: data.get("kind"), stage: data.get("stage"), deadline: data.get("deadline"), client: data.get("client").trim(), next: data.get("next").trim() });
-      save(items); form.reset(); status.textContent = "Проект добавлен"; render();
+      const project = { id: editingId || Date.now(), name: data.get("name").trim(), kind: data.get("kind"), stage: data.get("stage"), deadline: data.get("deadline"), client: data.get("client").trim(), next: data.get("next").trim() };
+      if (editingId) items = items.map(function (item) { return item.id === editingId ? project : item; });
+      else items.unshift(project);
+      save(items); status.textContent = editingId ? "Изменения сохранены" : "Проект добавлен"; resetForm(); render();
     });
+    cancel.addEventListener("click", function () { resetForm(); status.textContent = "Изменения отменены"; });
     filter.addEventListener("change", render);
     document.querySelector("[data-workspace-clear]").addEventListener("click", function () { if (items.length && window.confirm("Удалить все проекты из этого браузера?")) { items = []; save(items); render(); } });
     document.querySelector("[data-workspace-export]").addEventListener("click", function () {

@@ -358,6 +358,8 @@ details[open] summary::after { content: "−"; }
 .workspace-item select { max-width: 150px; padding: 7px 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font: inherit; font-size: .85rem; }
 .workspace-remove { width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--muted); cursor: pointer; font: 1.35rem/1 var(--font); }
 .workspace-remove:hover { color: #b42318; border-color: #b42318; }
+.workspace-action { border: 1px solid var(--border); border-radius: 8px; padding: 6px 8px; background: var(--surface); color: var(--text); cursor: pointer; font: inherit; font-size: .8rem; }
+.workspace-action:hover { background: var(--accent-soft); color: var(--accent); }
 .workspace-item__details { border-top: 1px solid var(--border); margin-top: 12px; padding-top: 10px; color: var(--muted); font-size: .85rem; justify-content: space-between; }
 .workspace-empty { padding: 30px 0; text-align: center; }
 @media (max-width: 860px) { .workspace-layout { grid-template-columns: 1fr; } }
