@@ -40,15 +40,31 @@
     const toggle = document.querySelector(".nav-toggle");
     const nav = document.querySelector(".nav");
     if (toggle && nav) {
+      function closeNav() {
+        nav.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
       toggle.addEventListener("click", function () {
         const open = nav.classList.toggle("is-open");
         toggle.setAttribute("aria-expanded", String(open));
       });
       nav.addEventListener("click", function (e) {
         if (e.target.tagName === "A") {
-          nav.classList.remove("is-open");
-          toggle.setAttribute("aria-expanded", "false");
+          closeNav();
         }
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && nav.classList.contains("is-open")) {
+          closeNav();
+          toggle.focus();
+        }
+      });
+      document.addEventListener("click", function (event) {
+        const header = document.querySelector(".header");
+        if (nav.classList.contains("is-open") && header && !header.contains(event.target)) closeNav();
+      });
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 860) closeNav();
       });
     }
 
