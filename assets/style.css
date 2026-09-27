@@ -366,6 +366,7 @@ details[open] summary::after { content: "−"; }
 .workspace-checklist > span { font-weight: 700; color: var(--accent); }
 .workspace-checklist label { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
 .workspace-checklist input { accent-color: var(--accent); }
+.workspace-checklist label:has(input:checked) { color: var(--ok); text-decoration: line-through; }
 .workspace-empty { padding: 30px 0; text-align: center; }
 @media (max-width: 860px) { .workspace-layout { grid-template-columns: 1fr; } }
 @media (max-width: 620px) { .workspace-toolbar, .workspace-item__top, .workspace-item__details { align-items: stretch; flex-direction: column; } .workspace-toolbar .field { width: 100%; } .workspace-item__controls { justify-content: space-between; } }
