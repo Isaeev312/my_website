@@ -150,7 +150,7 @@ code { background: var(--surface-2); padding: .1em .35em; border-radius: 6px; }
 /* ===== Hero ===== */
 .hero {
   padding: 72px 0 56px; position: relative; overflow: hidden;
-  background-color: #071521; background-image: url("hero-water-systems.png");
+  background-color: #071521; background-image: url("hero-water-systems.jpg");
   background-position: center; background-size: cover;
 }
 .hero__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; position: relative; }
