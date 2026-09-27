@@ -13,6 +13,7 @@
     const summary = document.querySelector("[data-workspace-summary]");
     const filter = document.querySelector("[data-workspace-filter]");
     const status = document.querySelector("[data-workspace-status]");
+    const importFile = document.querySelector("[data-workspace-file]");
     const formTitle = document.querySelector("[data-workspace-form-title]");
     const submit = document.querySelector("[data-workspace-submit]");
     const cancel = document.querySelector("[data-workspace-cancel]");
@@ -88,6 +89,32 @@
       const rows = [["Объект", "Раздел", "Стадия", "Дедлайн", "Заказчик", "Следующий шаг"]].concat(items.map(function (item) { return [item.name, item.kind, item.stage, item.deadline, item.client, item.next]; }));
       const blob = new Blob(["\ufeff" + rows.map(function (row) { return row.map(escape).join(";"); }).join("\n")], { type: "text/csv;charset=utf-8" });
       const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = "projects-vk-nvk.csv"; link.click(); URL.revokeObjectURL(url);
+    });
+    function download(text, name, type) {
+      const blob = new Blob([text], { type: type });
+      const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = name; link.click(); URL.revokeObjectURL(url);
+    }
+    document.querySelector("[data-workspace-backup]").addEventListener("click", function () {
+      download(JSON.stringify({ version: 1, exportedAt: new Date().toISOString(), projects: items }, null, 2), "projects-vk-nvk-backup.json", "application/json");
+      status.textContent = "Резервная копия создана";
+    });
+    document.querySelector("[data-workspace-import]").addEventListener("click", function () { importFile.click(); });
+    importFile.addEventListener("change", function () {
+      const file = importFile.files && importFile.files[0];
+      if (!file) return;
+      if (items.length && !window.confirm("Текущий список будет заменён данными из резервной копии. Продолжить?")) { importFile.value = ""; return; }
+      const reader = new FileReader();
+      reader.onload = function () {
+        try {
+          const data = JSON.parse(String(reader.result));
+          const projects = Array.isArray(data.projects) ? data.projects : null;
+          if (!projects || projects.some(function (item) { return !item || typeof item.name !== "string" || !stages.includes(item.stage); })) throw new Error("invalid");
+          items = projects.map(function (item) { return { id: item.id || Date.now() + Math.random(), name: item.name, kind: item.kind || "ВК", stage: item.stage, deadline: item.deadline || "", client: item.client || "", next: item.next || "" }; });
+          save(items); resetForm(); render(); status.textContent = "Резервная копия восстановлена";
+        } catch (e) { status.textContent = "Не удалось прочитать резервную копию"; }
+        importFile.value = "";
+      };
+      reader.readAsText(file, "UTF-8");
     });
     render();
   });
