@@ -51,6 +51,14 @@
       const mode = filter.value;
       const shown = items.filter(function (item) {
         return mode === "all" || (mode === "active" && item.stage !== "Завершён") || (mode === "upcoming" && upcoming(item)) || (mode === "done" && item.stage === "Завершён") || (mode === "late" && late(item));
+      }).sort(function (a, b) {
+        const aDone = a.stage === "Завершён";
+        const bDone = b.stage === "Завершён";
+        if (aDone !== bDone) return aDone ? 1 : -1;
+        if (!a.deadline && !b.deadline) return b.id - a.id;
+        if (!a.deadline) return 1;
+        if (!b.deadline) return -1;
+        return a.deadline.localeCompare(b.deadline);
       });
       list.textContent = "";
       shown.forEach(function (item) {
