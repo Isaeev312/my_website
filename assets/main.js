@@ -104,6 +104,11 @@
     const briefForm = document.querySelector("[data-brief-form]");
     if (briefForm) {
       const status = briefForm.querySelector("[data-brief-status]");
+      function validateBrief() {
+        if (briefForm.checkValidity()) return true;
+        briefForm.reportValidity();
+        return false;
+      }
       function briefText() {
         const data = new FormData(briefForm);
         const object = data.get("object").trim() || "не указан";
@@ -119,11 +124,13 @@
       }
       briefForm.addEventListener("submit", function (event) {
         event.preventDefault();
+        if (!validateBrief()) return;
         const url = "https://t.me/isaev312?text=" + encodeURIComponent(briefText());
         window.open(url, "_blank", "noopener");
       });
       const copyButton = briefForm.querySelector("[data-brief-copy]");
       if (copyButton) copyButton.addEventListener("click", function () {
+        if (!validateBrief()) return;
         const text = briefText();
         const copied = navigator.clipboard && navigator.clipboard.writeText
           ? navigator.clipboard.writeText(text) : Promise.reject();
@@ -135,8 +142,12 @@
       });
       const emailButton = briefForm.querySelector("[data-brief-email]");
       if (emailButton) emailButton.addEventListener("click", function () {
+        if (!validateBrief()) return;
         window.location.href = "mailto:isaeev312@gmail.com?subject=" + encodeURIComponent("Запрос по проекту ВК/НВК") +
           "&body=" + encodeURIComponent(briefText());
+      });
+      briefForm.addEventListener("reset", function () {
+        window.setTimeout(function () { status.textContent = "Форма очищена"; }, 0);
       });
     }
 

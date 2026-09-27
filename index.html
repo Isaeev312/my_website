@@ -272,11 +272,11 @@
           </div>
           <div class="field field--full">
             <label for="brief-object">Объект и город</label>
-            <input id="brief-object" name="object" type="text" placeholder="Например: жилой дом, Бишкек" autocomplete="off">
+            <input id="brief-object" name="object" type="text" placeholder="Например: жилой дом, Бишкек" autocomplete="off" required>
           </div>
           <div class="field field--full">
             <label for="brief-task">Что нужно сделать</label>
-            <textarea id="brief-task" name="task" rows="3" placeholder="Исходные данные, сети, особенности объекта"></textarea>
+            <textarea id="brief-task" name="task" rows="3" placeholder="Исходные данные, сети, особенности объекта" required></textarea>
           </div>
           <div class="field">
             <label for="brief-deadline">Желаемый срок</label>
@@ -284,13 +284,14 @@
           </div>
           <div class="field">
             <label for="brief-contact">Как с вами связаться</label>
-            <input id="brief-contact" name="contact" type="text" placeholder="Телефон или Telegram" autocomplete="off">
+            <input id="brief-contact" name="contact" type="text" placeholder="Телефон или Telegram" autocomplete="off" required>
           </div>
         </div>
         <div class="brief-form__actions">
           <button class="btn btn--primary" type="submit">Открыть Telegram</button>
           <button class="btn btn--ghost" type="button" data-brief-email>Открыть письмо</button>
           <button class="btn btn--ghost" type="button" data-brief-copy>Скопировать текст</button>
+          <button class="btn btn--ghost" type="reset" data-brief-reset>Очистить</button>
           <span class="brief-form__status" data-brief-status aria-live="polite"></span>
         </div>
       </form>
