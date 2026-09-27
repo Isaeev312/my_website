@@ -234,6 +234,7 @@ td code { white-space: nowrap; }
   background: var(--surface); color: var(--text); font: inherit; margin-bottom: 16px;
 }
 .search:focus, .field input:focus, .field select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.filter-status { margin: -4px 0 16px; color: var(--muted); font-size: .95rem; }
 
 /* ===== Калькуляторы ===== */
 .calc-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }

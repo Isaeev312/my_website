@@ -87,11 +87,16 @@
       const target = document.querySelector(input.getAttribute("data-filter"));
       if (!target) return;
       const items = target.querySelectorAll("[data-item]");
+      const status = document.querySelector('[data-filter-status="' + input.getAttribute("data-filter") + '"]');
       input.addEventListener("input", function () {
         const q = input.value.trim().toLowerCase();
+        let visible = 0;
         items.forEach(function (it) {
-          it.hidden = q !== "" && it.textContent.toLowerCase().indexOf(q) === -1;
+          const matches = q === "" || it.textContent.toLowerCase().indexOf(q) !== -1;
+          it.hidden = !matches;
+          if (matches) visible += 1;
         });
+        if (status) status.hidden = q === "" || visible !== 0;
       });
     });
 

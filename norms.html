@@ -56,6 +56,7 @@
         <a href="https://docs.cntd.ru/" rel="noopener" target="_blank">docs.cntd.ru</a>.
       </div>
       <input class="search" type="search" placeholder="Поиск по документам: например, «пожар» или «полимер»" data-filter="#docs-table" aria-label="Поиск по документам">
+      <p class="filter-status" data-filter-status="#docs-table" hidden aria-live="polite">По вашему запросу ничего не найдено.</p>
       <div class="table-wrap">
         <table id="docs-table">
           <thead><tr><th>Документ</th><th>Название</th><th>Область</th></tr></thead>
@@ -136,6 +137,7 @@
     <div class="container">
       <h2>Глоссарий</h2>
       <input class="search" type="search" placeholder="Найти термин" data-filter="#glossary-list" aria-label="Поиск по глоссарию">
+      <p class="filter-status" data-filter-status="#glossary-list" hidden aria-live="polite">По вашему запросу ничего не найдено.</p>
       <div id="glossary-list" class="grid grid--2">
         <div class="card" data-item><h3>ХВС / ГВС</h3><p class="muted">Холодное и горячее водоснабжение.</p></div>
         <div class="card" data-item><h3>ВПВ</h3><p class="muted">Внутренний противопожарный водопровод.</p></div>
