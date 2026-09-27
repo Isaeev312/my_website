@@ -22,6 +22,10 @@
 python -m http.server 8000
 ```
 
+## Сборка публикации
+
+Перед публикацией выполните `powershell -ExecutionPolicy Bypass -File .\build.ps1`. Скрипт полностью пересобирает каталог `dist` из исходных страниц и папки `assets`.
+
 ## Публикация на GitHub Pages
 
 1. Settings → Pages → Source: **Deploy from a branch**, Branch: **main**, папка **/(root)**.
