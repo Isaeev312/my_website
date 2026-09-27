@@ -255,7 +255,8 @@
       pipeDiameter.value = selected;
       pipeFlow.dispatchEvent(new Event("input"));
       pipeDiameter.dispatchEvent(new Event("input"));
-      document.getElementById("pipe").scrollIntoView({ behavior: "smooth", block: "start" });
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document.getElementById("pipe").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
       if (status) status.textContent = "Диаметр перенесён в расчёт потерь";
     });
   });
