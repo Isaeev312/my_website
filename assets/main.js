@@ -145,6 +145,12 @@
       const name = list.getAttribute("data-checklist");
       const key = "checklist-" + name;
       const inputs = Array.from(list.querySelectorAll('input[type="checkbox"]'));
+      const progress = document.querySelector('[data-check-progress="' + name + '"]');
+      function updateProgress() {
+        if (!progress) return;
+        const checkedCount = inputs.filter(function (input) { return input.checked; }).length;
+        progress.textContent = checkedCount + " из " + inputs.length + " пунктов выполнено";
+      }
       let savedChecks = [];
       try { savedChecks = JSON.parse(localStorage.getItem(key) || "[]"); } catch (e) { savedChecks = []; }
       inputs.forEach(function (input, index) {
@@ -155,12 +161,15 @@
             return result;
           }, []);
           try { localStorage.setItem(key, JSON.stringify(checked)); } catch (e) { /* приватный режим */ }
+          updateProgress();
         });
       });
+      updateProgress();
       const reset = document.querySelector('[data-checklist-reset="' + name + '"]');
       if (reset) reset.addEventListener("click", function () {
         inputs.forEach(function (input) { input.checked = false; });
         try { localStorage.removeItem(key); } catch (e) { /* приватный режим */ }
+        updateProgress();
       });
     });
   });
