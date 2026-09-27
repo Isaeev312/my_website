@@ -5,6 +5,13 @@
   function save(items) { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) { /* приватный режим */ } }
   function dateLabel(value) { return value ? new Date(value + "T00:00:00").toLocaleDateString("ru-RU", { day: "2-digit", month: "short" }) : "Без срока"; }
   function late(item) { return item.deadline && item.stage !== "Завершён" && item.deadline < new Date().toISOString().slice(0, 10); }
+  function upcoming(item) {
+    if (!item.deadline || item.stage === "Завершён") return false;
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const limit = new Date(today); limit.setDate(limit.getDate() + 7);
+    const deadline = new Date(item.deadline + "T00:00:00");
+    return deadline >= today && deadline <= limit;
+  }
   document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("[data-workspace-form]");
     if (!form) return;
@@ -43,7 +50,7 @@
     function render() {
       const mode = filter.value;
       const shown = items.filter(function (item) {
-        return mode === "all" || (mode === "active" && item.stage !== "Завершён") || (mode === "done" && item.stage === "Завершён") || (mode === "late" && late(item));
+        return mode === "all" || (mode === "active" && item.stage !== "Завершён") || (mode === "upcoming" && upcoming(item)) || (mode === "done" && item.stage === "Завершён") || (mode === "late" && late(item));
       });
       list.textContent = "";
       shown.forEach(function (item) {
