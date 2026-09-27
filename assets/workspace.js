@@ -3,7 +3,16 @@
   const stages = ["Исходные данные", "Расчёты", "Увязка", "Выпуск", "Замечания", "Завершён"];
   function read() { try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch (e) { return []; } }
   function save(items) { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) { /* приватный режим */ } }
-  function dateLabel(value) { return value ? new Date(value + "T00:00:00").toLocaleDateString("ru-RU", { day: "2-digit", month: "short" }) : "Без срока"; }
+  function dateLabel(value) {
+    if (!value) return "Без срока";
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const deadline = new Date(value + "T00:00:00");
+    const days = Math.round((deadline - today) / 86400000);
+    if (days === 0) return "Сегодня";
+    if (days === 1) return "Завтра";
+    if (days < 0) return "Просрочен на " + Math.abs(days) + " дн.";
+    return deadline.toLocaleDateString("ru-RU", { day: "2-digit", month: "short" }) + " · через " + days + " дн.";
+  }
   function late(item) { return item.deadline && item.stage !== "Завершён" && item.deadline < new Date().toISOString().slice(0, 10); }
   function upcoming(item) {
     if (!item.deadline || item.stage === "Завершён") return false;
@@ -86,7 +95,7 @@
         });
         controls.append(stage, edit, remove); top.append(title, controls); article.appendChild(top);
         const details = document.createElement("div"); details.className = "workspace-item__details";
-        const due = document.createElement("span"); due.textContent = (late(item) ? "Просрочен: " : "Срок: ") + dateLabel(item.deadline);
+        const due = document.createElement("span"); due.textContent = "Срок: " + dateLabel(item.deadline);
         const next = document.createElement("span"); next.textContent = item.next || "Следующий шаг не указан";
         details.append(due, next); article.appendChild(details); list.appendChild(article);
       });
