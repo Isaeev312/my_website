@@ -87,7 +87,7 @@
                   <option value="0.25">Чугун ≈ 0,25</option>
                 </select>
               </div>
-              <div class="field field--full"><label for="p-local">Надбавка на местные сопротивления, % от потерь по длине</label><input id="p-local" type="number" step="any" value="0" inputmode="decimal"></div>
+              <div class="field field--full"><label for="p-local">Надбавка на местные сопротивления, % от потерь по длине</label><input id="p-local" type="number" min="0" step="any" value="0" inputmode="decimal"></div>
             </div>
           </div>
           <div class="result" aria-live="polite">
@@ -100,6 +100,7 @@
             <div class="result__row result__row--main"><span>Потери с местными</span><b id="p-htot">—</b></div>
           </div>
         </div>
+        <p class="status status--warn" id="p-status" hidden aria-live="polite"></p>
         <div class="formula">
           v = 4q / (π·d²) · Re = v·d / ν · ν = 1,78·10⁻⁶ / (1 + 0,0337t + 0,000221t²)<br>
           λ: Re &lt; 2300 → 64/Re, иначе Коулбрук–Уайт: 1/√λ = −2·lg(Δ/(3,7d) + 2,51/(Re·√λ))<br>
@@ -122,6 +123,7 @@
             <div class="result__row"><span>Фактическая скорость</span><b id="d-vreal">—</b></div>
           </div>
         </div>
+        <p class="status status--warn" id="d-status" hidden aria-live="polite"></p>
         <div class="formula">d = √(4q / (π·v)). Для точного подбора подставьте в ряд реальные внутренние диаметры выбранных труб (с учётом SDR / толщины стенки).</div>
       </div>
 
@@ -151,6 +153,7 @@
             <div class="result__row"><span>Гидравлический радиус R</span><b id="g-r">—</b></div>
           </div>
         </div>
+        <p class="status status--warn" id="g-status" hidden aria-live="polite"></p>
         <div class="formula">
           θ = 2·arccos(1 − 2h/d) · ω = d²/8 · (θ − sin θ) · χ = d·θ/2 · R = ω/χ<br>
           v = (1/n) · R^(2/3) · i^(1/2)  (формула Маннинга) · q = v·ω<br>
@@ -165,7 +168,7 @@
           <div class="fields">
             <div class="field"><label for="w-norm">Норма, л/сут на единицу</label><input id="w-norm" type="number" step="any" value="180" inputmode="decimal"></div>
             <div class="field"><label for="w-count">Кол-во потребителей U</label><input id="w-count" type="number" step="any" value="300" inputmode="decimal"></div>
-            <div class="field field--full"><label for="w-hours">Период водопотребления T, ч</label><input id="w-hours" type="number" step="any" value="24" inputmode="decimal"></div>
+            <div class="field field--full"><label for="w-hours">Период водопотребления T, ч</label><input id="w-hours" type="number" min="0.01" max="24" step="any" value="24" inputmode="decimal"></div>
           </div>
           <div class="result" aria-live="polite">
             <div class="result__row result__row--main"><span>Суточный расход</span><b id="w-day">—</b></div>
@@ -173,6 +176,7 @@
             <div class="result__row"><span>Средний секундный</span><b id="w-sec">—</b></div>
           </div>
         </div>
+        <p class="status status--warn" id="w-status" hidden aria-live="polite"></p>
         <div class="formula">Qсут = q·U / 1000 · Qср.ч = Qсут / T. Норму водопотребления принимайте по СП 30.13330 для конкретного типа потребителя. Максимальные расходы считаются с коэффициентами неравномерности — они здесь не учтены.</div>
       </div>
 

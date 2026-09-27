@@ -11,6 +11,12 @@
     const el = document.getElementById(id);
     if (el) el.textContent = text;
   }
+  function setStatus(id, text) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = text || "";
+    el.hidden = !text;
+  }
   function fmt(x, digits) {
     if (!isFinite(x)) return "—";
     return x.toLocaleString("ru-RU", { maximumFractionDigits: digits, minimumFractionDigits: 0 });
@@ -59,11 +65,14 @@
     const L = num("p-l");             // м
     const rough = num("p-k") / 1000;  // м
     const t = num("p-t");
-    const local = num("p-local") / 100 || 0;
-    if (!positive(Q, d, L) || !(rough >= 0) || !isFinite(t)) {
+    const localPercent = num("p-local");
+    const local = localPercent / 100;
+    if (!positive(Q, d, L) || !(rough >= 0) || !isFinite(t) || !(localPercent >= 0)) {
       ["p-v", "p-re", "p-lambda", "p-i", "p-h", "p-htot", "p-regime"].forEach(function (id) { set(id, "—"); });
+      setStatus("p-status", "Введите положительные расход, диаметр и длину; шероховатость и надбавка не могут быть отрицательными.");
       return;
     }
+    setStatus("p-status", "");
     const A = Math.PI * d * d / 4;
     const v = Q / A;
     const nu = waterViscosity(t);
@@ -84,7 +93,12 @@
   function calcDiam() {
     const Q = num("d-q") / 1000;
     const v = num("d-v");
-    if (!positive(Q, v)) { set("d-d", "—"); set("d-dn", "—"); set("d-vreal", "—"); return; }
+    if (!positive(Q, v)) {
+      set("d-d", "—"); set("d-dn", "—"); set("d-vreal", "—");
+      setStatus("d-status", "Введите положительные расход и целевую скорость.");
+      return;
+    }
+    setStatus("d-status", "");
     const d = Math.sqrt(4 * Q / (Math.PI * v)) * 1000; // мм
     set("d-d", fmt(d, 1) + " мм");
     // Ближайший больший внутренний диаметр из ряда, введённого пользователем
@@ -99,6 +113,7 @@
     } else {
       set("d-dn", "нет в ряду");
       set("d-vreal", "—");
+      setStatus("d-status", "В указанном ряду нет диаметра, достаточного для расчётного расхода.");
     }
   }
 
@@ -110,8 +125,10 @@
     const n = num("g-n");
     if (!positive(d, slope, n) || !(fill > 0 && fill <= 1)) {
       ["g-v", "g-q", "g-qfull", "g-a", "g-r"].forEach(function (id) { set(id, "—"); });
+      setStatus("g-status", "Введите положительные диаметр, уклон и коэффициент n; наполнение должно быть больше 0 и не больше 1.");
       return;
     }
+    setStatus("g-status", "");
     // Центральный угол смоченного сегмента
     const theta = 2 * Math.acos(1 - 2 * fill);
     const A = d * d / 8 * (theta - Math.sin(theta));
@@ -133,7 +150,12 @@
     const norm = num("w-norm");  // л/сут на единицу
     const count = num("w-count");
     const hours = num("w-hours");
-    if (!positive(norm, count, hours)) { set("w-day", "—"); set("w-hour", "—"); set("w-sec", "—"); return; }
+    if (!positive(norm, count, hours) || hours > 24) {
+      set("w-day", "—"); set("w-hour", "—"); set("w-sec", "—");
+      setStatus("w-status", "Введите положительные значения; период водопотребления должен быть не больше 24 часов.");
+      return;
+    }
+    setStatus("w-status", "");
     const day = norm * count / 1000;        // м³/сут
     const hour = day / hours;               // м³/ч
     set("w-day", fmt(day, 2) + " м³/сут");
