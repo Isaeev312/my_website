@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Проекты — Айдар Исаев</title>
+  <meta name="description" content="Портфолио проектов ВК/НВК и собственные инженерные программы Айдара Исаева.">
+  <meta property="og:title" content="Проекты — Айдар Исаев">
+  <meta property="og:description" content="Объекты ВК/НВК и инженерные программы.">
+  <meta name="theme-color" content="#0b6bcb">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b6bcb'/%3E%3Cpath d='M32 12c-8 11-14 18-14 26a14 14 0 0 0 28 0c0-8-6-15-14-26z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/main.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="logo" href="index.html"><span class="logo__mark">ВК</span><span>Айдар Исаев<small>инженер ВК / НВК</small></span></a>
+    <button class="icon-btn nav-toggle" type="button" aria-label="Меню" aria-expanded="false">☰</button>
+    <nav class="nav" aria-label="Основное меню">
+      <a href="index.html">Главная</a>
+      <a href="norms.html">Нормативы</a>
+      <a href="calc.html">Калькуляторы</a>
+      <a href="learn.html">Обучение</a>
+      <a href="projects.html">Проекты</a>
+      <a href="index.html#contacts">Контакты</a>
+    </nav>
+    <button class="icon-btn" type="button" data-theme-toggle aria-label="Тема">☾</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-head">
+    <div class="container">
+      <span class="eyebrow">Портфолио</span>
+      <h1>Проекты</h1>
+      <p class="lead">Объекты, над которыми я работал, и программы, которые пишу для автоматизации расчётов.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:16px">
+    <div class="container">
+      <h2>Объекты</h2>
+      <p class="muted">Шаблоны карточек — замените своими объектами. <span class="placeholder">Карточки ниже — примеры заполнения, не реальные проекты.</span></p>
+      <div class="grid grid--3" style="margin-top:20px">
+        <!-- Шаблон карточки объекта: скопируйте блок и заполните -->
+        <article class="card card--template">
+          <span class="tag tag--accent">Жилой дом</span><span class="tag">ВК · НВК</span>
+          <h3>Название объекта</h3>
+          <p class="muted">Город, год. Этажность, площадь. Что сделано: системы, стадия, особенности решения.</p>
+        </article>
+        <article class="card card--template">
+          <span class="tag tag--accent">Общественное здание</span><span class="tag">ВК</span>
+          <h3>Название объекта</h3>
+          <p class="muted">Краткое описание: ВПВ, насосная станция, водостоки, что было сложным и как решено.</p>
+        </article>
+        <article class="card card--template">
+          <span class="tag tag--accent">Производство</span><span class="tag">НВК</span>
+          <h3>Название объекта</h3>
+          <p class="muted">Наружные сети, ЛОС, КНС, подключение к городским сетям по ТУ.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2>Инженерные программы</h2>
+      <p class="muted">Собственные инструменты для ускорения расчётов.</p>
+      <div class="grid grid--2" style="margin-top:20px">
+        <article class="card">
+          <div class="card__icon">📊</div>
+          <h3>Нагрузки</h3>
+          <p class="muted">Программа на C# для расчёта нагрузок по водопотреблению и водоотведению. <span class="placeholder">Опишите возможности, добавьте скриншот.</span></p>
+          <span class="tag">C#</span><span class="tag">Desktop</span>
+        </article>
+        <article class="card">
+          <div class="card__icon">💧</div>
+          <h3>Гидравлика</h3>
+          <p class="muted">Гидравлические расчёты трубопроводов. <span class="placeholder">Опишите возможности, добавьте ссылку.</span></p>
+          <span class="tag">Расчёты</span>
+        </article>
+        <a class="card" href="calc.html">
+          <div class="card__icon">🧮</div>
+          <h3>Онлайн-калькуляторы</h3>
+          <p class="muted">Облегчённые версии расчётов прямо в браузере: напорные и самотечные трубы, перевод единиц.</p>
+          <span class="tag tag--accent">Открыть →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <span>© <span data-year>2026</span> Айдар Исаев · инженер ВК/НВК</span>
+    <nav aria-label="Навигация в подвале">
+      <a href="norms.html">Нормативы</a>
+      <a href="calc.html">Калькуляторы</a>
+      <a href="learn.html">Обучение</a>
+      <a href="projects.html">Проекты</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Калькуляторы ВК/НВК — Айдар Исаев</title>
+  <meta name="description" content="Онлайн-калькуляторы для инженера ВК/НВК: скорость и потери напора в трубе, подбор диаметра, самотечная канализация с частичным наполнением, перевод расходов, суточное водопотребление.">
+  <meta property="og:title" content="Калькуляторы ВК/НВК">
+  <meta property="og:description" content="Гидравлика напорных и самотечных трубопроводов, перевод расходов и водопотребление.">
+  <meta name="theme-color" content="#0b6bcb">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b6bcb'/%3E%3Cpath d='M32 12c-8 11-14 18-14 26a14 14 0 0 0 28 0c0-8-6-15-14-26z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/main.js"></script>
+  <script src="assets/calc.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="logo" href="index.html"><span class="logo__mark">ВК</span><span>Айдар Исаев<small>инженер ВК / НВК</small></span></a>
+    <button class="icon-btn nav-toggle" type="button" aria-label="Меню" aria-expanded="false">☰</button>
+    <nav class="nav" aria-label="Основное меню">
+      <a href="index.html">Главная</a>
+      <a href="norms.html">Нормативы</a>
+      <a href="calc.html">Калькуляторы</a>
+      <a href="learn.html">Обучение</a>
+      <a href="projects.html">Проекты</a>
+      <a href="index.html#contacts">Контакты</a>
+    </nav>
+    <button class="icon-btn" type="button" data-theme-toggle aria-label="Тема">☾</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-head">
+    <div class="container">
+      <span class="eyebrow">Инструменты</span>
+      <h1>Инженерные калькуляторы</h1>
+      <p class="lead">Быстрые проверочные расчёты. Результат пересчитывается сразу при вводе. Формулы указаны под каждым расчётом.</p>
+      <div class="note" style="margin-top:16px">
+        Калькуляторы предназначены для оценки и самопроверки. Для проектной документации принимайте нормативные значения и методики по действующим СП и данным производителя труб.
+      </div>
+      <div class="toc">
+        <a class="tag tag--accent" href="#units">Перевод расходов</a>
+        <a class="tag tag--accent" href="#pipe">Напорная труба</a>
+        <a class="tag tag--accent" href="#diam">Подбор диаметра</a>
+        <a class="tag tag--accent" href="#gravity">Самотёк</a>
+        <a class="tag tag--accent" href="#daily">Водопотребление</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:16px">
+    <div class="container">
+
+      <!-- 1. Перевод расходов -->
+      <div class="card calc" id="units">
+        <h2>Перевод расходов</h2>
+        <p class="muted">Введите значение в любом поле — остальные пересчитаются.</p>
+        <div class="fields">
+          <div class="field"><label for="u-ls">л/с</label><input id="u-ls" type="number" step="any" value="1" inputmode="decimal"></div>
+          <div class="field"><label for="u-m3h">м³/ч</label><input id="u-m3h" type="number" step="any" inputmode="decimal"></div>
+          <div class="field"><label for="u-m3d">м³/сут</label><input id="u-m3d" type="number" step="any" inputmode="decimal"></div>
+          <div class="field"><label for="u-lmin">л/мин</label><input id="u-lmin" type="number" step="any" inputmode="decimal"></div>
+        </div>
+      </div>
+
+      <!-- 2. Напорный трубопровод -->
+      <div class="card calc" id="pipe">
+        <h2>Напорный трубопровод: скорость и потери напора</h2>
+        <div class="calc__grid">
+          <div>
+            <div class="fields">
+              <div class="field"><label for="p-q">Расход q, л/с</label><input id="p-q" type="number" step="any" value="1" inputmode="decimal"></div>
+              <div class="field"><label for="p-d">Внутр. диаметр d, мм</label><input id="p-d" type="number" step="any" value="32" inputmode="decimal"></div>
+              <div class="field"><label for="p-l">Длина L, м</label><input id="p-l" type="number" step="any" value="100" inputmode="decimal"></div>
+              <div class="field"><label for="p-t">Температура воды, °C</label><input id="p-t" type="number" step="any" value="10" inputmode="decimal"></div>
+              <div class="field"><label for="p-k">Шероховатость Δ, мм</label><input id="p-k" type="number" step="any" value="0.01" inputmode="decimal"></div>
+              <div class="field"><label for="p-k-preset">Материал (ориентир.)</label>
+                <select id="p-k-preset" data-preset="p-k">
+                  <option value="">— выбрать —</option>
+                  <option value="0.01">Полимеры (ПЭ, ПП, ПВХ) ≈ 0,01</option>
+                  <option value="0.0015">Медь ≈ 0,0015</option>
+                  <option value="0.1">Сталь новая ≈ 0,1</option>
+                  <option value="0.5">Сталь б/у ≈ 0,5</option>
+                  <option value="0.25">Чугун ≈ 0,25</option>
+                </select>
+              </div>
+              <div class="field field--full"><label for="p-local">Надбавка на местные сопротивления, % от потерь по длине</label><input id="p-local" type="number" step="any" value="0" inputmode="decimal"></div>
+            </div>
+          </div>
+          <div class="result" aria-live="polite">
+            <div class="result__row result__row--main"><span>Скорость v</span><b id="p-v">—</b></div>
+            <div class="result__row"><span>Число Рейнольдса Re</span><b id="p-re">—</b></div>
+            <div class="result__row"><span>Режим</span><b id="p-regime">—</b></div>
+            <div class="result__row"><span>Коэффициент λ</span><b id="p-lambda">—</b></div>
+            <div class="result__row"><span>Удельные потери i</span><b id="p-i">—</b></div>
+            <div class="result__row"><span>Потери по длине h</span><b id="p-h">—</b></div>
+            <div class="result__row result__row--main"><span>Потери с местными</span><b id="p-htot">—</b></div>
+          </div>
+        </div>
+        <div class="formula">
+          v = 4q / (π·d²) · Re = v·d / ν · ν = 1,78·10⁻⁶ / (1 + 0,0337t + 0,000221t²)<br>
+          λ: Re &lt; 2300 → 64/Re, иначе Коулбрук–Уайт: 1/√λ = −2·lg(Δ/(3,7d) + 2,51/(Re·√λ))<br>
+          h = λ · (L/d) · v² / (2g)  (формула Дарси–Вейсбаха)
+        </div>
+      </div>
+
+      <!-- 3. Подбор диаметра -->
+      <div class="card calc" id="diam">
+        <h2>Подбор диаметра по скорости</h2>
+        <div class="calc__grid">
+          <div class="fields">
+            <div class="field"><label for="d-q">Расход q, л/с</label><input id="d-q" type="number" step="any" value="2.5" inputmode="decimal"></div>
+            <div class="field"><label for="d-v">Целевая скорость v, м/с</label><input id="d-v" type="number" step="any" value="1.2" inputmode="decimal"></div>
+            <div class="field field--full"><label for="d-series">Ряд внутренних диаметров, мм (через пробел или «;»)</label><input id="d-series" type="text" value="15 20 25 32 40 50 65 80 100 125 150 200 250 300"></div>
+          </div>
+          <div class="result" aria-live="polite">
+            <div class="result__row"><span>Расчётный диаметр</span><b id="d-d">—</b></div>
+            <div class="result__row result__row--main"><span>Принятый из ряда</span><b id="d-dn">—</b></div>
+            <div class="result__row"><span>Фактическая скорость</span><b id="d-vreal">—</b></div>
+          </div>
+        </div>
+        <div class="formula">d = √(4q / (π·v)). Для точного подбора подставьте в ряд реальные внутренние диаметры выбранных труб (с учётом SDR / толщины стенки).</div>
+      </div>
+
+      <!-- 4. Самотёк -->
+      <div class="card calc" id="gravity">
+        <h2>Самотечная труба: частичное наполнение</h2>
+        <div class="calc__grid">
+          <div class="fields">
+            <div class="field"><label for="g-d">Внутр. диаметр d, мм</label><input id="g-d" type="number" step="any" value="150" inputmode="decimal"></div>
+            <div class="field"><label for="g-fill">Наполнение h/d (0…1)</label><input id="g-fill" type="number" step="0.05" min="0" max="1" value="0.5" inputmode="decimal"></div>
+            <div class="field"><label for="g-i">Уклон i, ‰</label><input id="g-i" type="number" step="any" value="8" inputmode="decimal"></div>
+            <div class="field"><label for="g-n">Коэф. шероховатости n</label><input id="g-n" type="number" step="any" value="0.01" inputmode="decimal"></div>
+            <div class="field field--full"><label for="g-n-preset">Материал (ориентир.)</label>
+              <select id="g-n-preset" data-preset="g-n">
+                <option value="">— выбрать —</option>
+                <option value="0.01">Полимерные трубы ≈ 0,010</option>
+                <option value="0.013">Чугун, керамика ≈ 0,013</option>
+                <option value="0.014">Бетон, железобетон ≈ 0,014</option>
+              </select>
+            </div>
+          </div>
+          <div class="result" aria-live="polite">
+            <div class="result__row result__row--main"><span>Скорость v</span><b id="g-v">—</b></div>
+            <div class="result__row result__row--main"><span>Расход q</span><b id="g-q">—</b></div>
+            <div class="result__row"><span>Пропускная способность при полном наполнении</span><b id="g-qfull">—</b></div>
+            <div class="result__row"><span>Живое сечение ω</span><b id="g-a">—</b></div>
+            <div class="result__row"><span>Гидравлический радиус R</span><b id="g-r">—</b></div>
+          </div>
+        </div>
+        <div class="formula">
+          θ = 2·arccos(1 − 2h/d) · ω = d²/8 · (θ − sin θ) · χ = d·θ/2 · R = ω/χ<br>
+          v = (1/n) · R^(2/3) · i^(1/2)  (формула Маннинга) · q = v·ω<br>
+          Минимальные уклоны, скорости и допустимое наполнение принимайте по СП 30 (внутренние сети) и СП 32 (наружные).
+        </div>
+      </div>
+
+      <!-- 5. Водопотребление -->
+      <div class="card calc" id="daily">
+        <h2>Суточное водопотребление по норме</h2>
+        <div class="calc__grid">
+          <div class="fields">
+            <div class="field"><label for="w-norm">Норма, л/сут на единицу</label><input id="w-norm" type="number" step="any" value="180" inputmode="decimal"></div>
+            <div class="field"><label for="w-count">Кол-во потребителей U</label><input id="w-count" type="number" step="any" value="300" inputmode="decimal"></div>
+            <div class="field field--full"><label for="w-hours">Период водопотребления T, ч</label><input id="w-hours" type="number" step="any" value="24" inputmode="decimal"></div>
+          </div>
+          <div class="result" aria-live="polite">
+            <div class="result__row result__row--main"><span>Суточный расход</span><b id="w-day">—</b></div>
+            <div class="result__row"><span>Средний часовой</span><b id="w-hour">—</b></div>
+            <div class="result__row"><span>Средний секундный</span><b id="w-sec">—</b></div>
+          </div>
+        </div>
+        <div class="formula">Qсут = q·U / 1000 · Qср.ч = Qсут / T. Норму водопотребления принимайте по СП 30.13330 для конкретного типа потребителя. Максимальные расходы считаются с коэффициентами неравномерности — они здесь не учтены.</div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <span>© <span data-year>2026</span> Айдар Исаев · инженер ВК/НВК</span>
+    <nav aria-label="Навигация в подвале">
+      <a href="norms.html">Нормативы</a>
+      <a href="calc.html">Калькуляторы</a>
+      <a href="learn.html">Обучение</a>
+      <a href="projects.html">Проекты</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

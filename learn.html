@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Обучение проектированию ВК/НВК — Айдар Исаев</title>
+  <meta name="description" content="Путь проектировщика ВК/НВК, чек-листы самопроверки раздела, памятка для новых сотрудников и полезные материалы.">
+  <meta property="og:title" content="Обучение проектированию ВК/НВК">
+  <meta property="og:description" content="Путь проектировщика, чек-листы проверки и памятка для сотрудников.">
+  <meta name="theme-color" content="#0b6bcb">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b6bcb'/%3E%3Cpath d='M32 12c-8 11-14 18-14 26a14 14 0 0 0 28 0c0-8-6-15-14-26z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/main.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="logo" href="index.html"><span class="logo__mark">ВК</span><span>Айдар Исаев<small>инженер ВК / НВК</small></span></a>
+    <button class="icon-btn nav-toggle" type="button" aria-label="Меню" aria-expanded="false">☰</button>
+    <nav class="nav" aria-label="Основное меню">
+      <a href="index.html">Главная</a>
+      <a href="norms.html">Нормативы</a>
+      <a href="calc.html">Калькуляторы</a>
+      <a href="learn.html">Обучение</a>
+      <a href="projects.html">Проекты</a>
+      <a href="index.html#contacts">Контакты</a>
+    </nav>
+    <button class="icon-btn" type="button" data-theme-toggle aria-label="Тема">☾</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-head">
+    <div class="container">
+      <span class="eyebrow">Для учеников и сотрудников</span>
+      <h1>Обучение проектированию ВК/НВК</h1>
+      <p class="lead">Маршрут от первых норм до самостоятельного выпуска раздела, чек-листы самопроверки и правила работы в команде.</p>
+      <div class="toc">
+        <a class="tag tag--accent" href="#path">Путь проектировщика</a>
+        <a class="tag tag--accent" href="#check-vk">Чек-лист ВК</a>
+        <a class="tag tag--accent" href="#check-nvk">Чек-лист НВК</a>
+        <a class="tag tag--accent" href="#team">Памятка сотруднику</a>
+        <a class="tag tag--accent" href="#faq">Вопросы</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="path" style="padding-top:16px">
+    <div class="container grid grid--2" style="align-items:start">
+      <div>
+        <h2>Путь проектировщика</h2>
+        <p class="muted">Примерная последовательность освоения. Каждый этап закрепляется на реальном объекте под контролем наставника.</p>
+      </div>
+      <ol class="timeline">
+        <li data-step="1"><h3>Основы и оформление</h3><p class="muted">Системы и их обозначения, СПДС: ГОСТ Р 21.101, ГОСТ 21.601, ГОСТ 21.206. Чтение готовых комплектов ВК и НВК.</p></li>
+        <li data-step="2"><h3>Внутренний водопровод</h3><p class="muted">СП 30: нормы водопотребления, расчётные расходы, трассировка стояков и магистралей, гидравлический расчёт, требуемый напор, водомерный узел.</p></li>
+        <li data-step="3"><h3>Внутренняя канализация и водостоки</h3><p class="muted">Приборы и отводы, стояки и вентиляция систем, выпуски, пропускная способность, внутренние водостоки К2.</p></li>
+        <li data-step="4"><h3>Противопожарный водопровод</h3><p class="muted">СП 10.13130: необходимость ВПВ, число струй и расход, размещение ПК, насосные установки. Увязка с разделом пожарной безопасности.</p></li>
+        <li data-step="5"><h3>Наружные сети</h3><p class="muted">СП 31, СП 32, СП 8.13130: технические условия, трассировка на генплане, колодцы, продольные профили, наружное пожаротушение.</p></li>
+        <li data-step="6"><h3>Стадия П и экспертиза</h3><p class="muted">Состав ИОС2 / ИОС3 по ПП № 87, текстовая часть, баланс водопотребления и водоотведения, ответы на замечания.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="check-vk">
+    <div class="container grid grid--2" style="align-items:start">
+      <div>
+        <h2>Чек-лист самопроверки: ВК</h2>
+        <p class="muted">Пройдитесь по списку перед сдачей раздела на проверку.</p>
+      </div>
+      <ul class="checklist card">
+        <li>Исходные данные: ТУ, задание, архитектура и конструктив актуальной версии</li>
+        <li>Баланс водопотребления и водоотведения совпадает с расчётами и ТУ</li>
+        <li>Гарантийный напор на вводе ≥ требуемому, либо запроектирована насосная установка</li>
+        <li>Все системы подписаны и обозначены по ГОСТ 21.206 на планах и схемах</li>
+        <li>Диаметры, уклоны и отметки на схемах совпадают с планами</li>
+        <li>Стояки канализации вентилируются, ревизии и прочистки на своих местах</li>
+        <li>Проходы через перекрытия и противопожарные преграды решены и согласованы с КР</li>
+        <li>Пересечения с другими инженерными системами проверены</li>
+        <li>Спецификация соответствует чертежам, единицы и количества проверены</li>
+        <li>Общие данные: ведомости, ссылочные документы, условные обозначения, штампы</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="check-nvk">
+    <div class="container grid grid--2" style="align-items:start">
+      <div>
+        <h2>Чек-лист самопроверки: НВК</h2>
+        <p class="muted">Наружные сети чаще всего «ломаются» на отметках и пересечениях.</p>
+      </div>
+      <ul class="checklist card">
+        <li>Точки подключения, диаметры и отметки соответствуют ТУ</li>
+        <li>Трассы увязаны с генпланом, сводным планом сетей и зелёными насаждениями</li>
+        <li>Расстояния до фундаментов и других сетей соответствуют нормам</li>
+        <li>Пересечения на профилях показаны, вертикальные расстояния проверены</li>
+        <li>Глубина заложения учитывает промерзание и нагрузку на трубу</li>
+        <li>Уклоны самотечных сетей обеспечивают незаиливающие скорости</li>
+        <li>Колодцы и камеры на профилях совпадают с планом (номера, отметки лотков)</li>
+        <li>Наружное пожаротушение: расход и размещение гидрантов обоснованы</li>
+        <li>Выпуски из здания совпадают с разделом ВК по отметкам и диаметрам</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="team">
+    <div class="container">
+      <h2>Памятка новому сотруднику</h2>
+      <div class="grid grid--3" style="margin-top:20px">
+        <div class="card">
+          <div class="card__icon">📁</div>
+          <h3>Файлы и версии</h3>
+          <p class="muted">Работаем только в актуальной подоснове. Имя файла: <code>Объект_Марка_Лист_вер</code>. Старые версии — в архив, не удалять.</p>
+        </div>
+        <div class="card">
+          <div class="card__icon">🔁</div>
+          <h3>Проверка</h3>
+          <p class="muted">Перед передачей — самопроверка по чек-листу. Замечания закрываются в том же файле, с отметкой о выполнении.</p>
+        </div>
+        <div class="card">
+          <div class="card__icon">💬</div>
+          <h3>Вопросы</h3>
+          <p class="muted">Непонятно — спрашивайте сразу. Решения по спорным вопросам фиксируйте письменно: в переписке или журнале объекта.</p>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:16px"><span class="placeholder">Отредактируйте правила под свою команду.</span></p>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container">
+      <h2>Частые вопросы</h2>
+      <details>
+        <summary>Чем ВК отличается от НВК?</summary>
+        <p class="muted">ВК — внутренние системы здания: от ввода водопровода до приборов и от приборов до выпуска канализации. НВК — наружные сети на участке и подключение к городским сетям. Граница обычно проходит по наружной стене здания или первому колодцу.</p>
+      </details>
+      <details>
+        <summary>С чего начать изучение норм?</summary>
+        <p class="muted">С СП 30.13330 и ГОСТ 21.601 — параллельно с разбором готового комплекта ВК. Так сразу видно, как требования норм превращаются в чертежи.</p>
+      </details>
+      <details>
+        <summary>Можно ли пользоваться калькуляторами сайта в проекте?</summary>
+        <p class="muted">Как инструментом самопроверки — да. В проектную документацию закладываются расчёты по методикам действующих СП с нормативными коэффициентами и данными производителя оборудования.</p>
+      </details>
+      <details>
+        <summary>Как попасть на обучение или стажировку?</summary>
+        <p class="muted">Напишите в Telegram <a href="https://t.me/isaev312" rel="noopener" target="_blank">@isaev312</a> — расскажите о себе и своём опыте.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <span>© <span data-year>2026</span> Айдар Исаев · инженер ВК/НВК</span>
+    <nav aria-label="Навигация в подвале">
+      <a href="norms.html">Нормативы</a>
+      <a href="calc.html">Калькуляторы</a>
+      <a href="learn.html">Обучение</a>
+      <a href="projects.html">Проекты</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
