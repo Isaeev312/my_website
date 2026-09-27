@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Рабочее место — Айдар Исаев</title>
+  <meta name="description" content="Локальное рабочее место для учёта проектов ВК и НВК.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b6bcb">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b6bcb'/%3E%3Cpath d='M32 12c-8 11-14 18-14 26a14 14 0 0 0 28 0c0-8-6-15-14-26z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/main.js"></script>
+  <script src="assets/workspace.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header">
+  <div class="container header__inner">
+    <a class="logo" href="index.html"><span class="logo__mark">ВК</span><span>Айдар Исаев<small>рабочее место</small></span></a>
+    <nav class="nav workspace-nav" aria-label="Основное меню">
+      <a href="index.html">Сайт</a>
+      <a href="workspace.html" aria-current="page">Проекты</a>
+    </nav>
+    <button class="icon-btn" type="button" data-theme-toggle aria-label="Тема">☾</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-head workspace-head">
+    <div class="container">
+      <span class="eyebrow">Локальное рабочее место</span>
+      <h1>Проекты ВК / НВК</h1>
+      <p class="lead">Данные сохраняются только в этом браузере. Не добавляйте сюда договоры, реквизиты или файлы, пока не появится защищённый кабинет.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:16px">
+    <div class="container workspace-layout">
+      <aside class="workspace-panel">
+        <div class="workspace-summary" data-workspace-summary aria-live="polite"></div>
+        <form class="card workspace-form" data-workspace-form>
+          <h2>Новый проект</h2>
+          <div class="fields">
+            <div class="field field--full"><label for="ws-name">Объект</label><input id="ws-name" name="name" type="text" placeholder="Например: жилой дом, Бишкек" required></div>
+            <div class="field"><label for="ws-kind">Раздел</label><select id="ws-kind" name="kind"><option>ВК</option><option>НВК</option><option>ВК и НВК</option><option>Консультация</option></select></div>
+            <div class="field"><label for="ws-stage">Стадия</label><select id="ws-stage" name="stage"><option value="Исходные данные">Исходные данные</option><option value="Расчёты">Расчёты</option><option value="Увязка">Увязка</option><option value="Выпуск">Выпуск</option><option value="Замечания">Замечания</option><option value="Завершён">Завершён</option></select></div>
+            <div class="field"><label for="ws-deadline">Дедлайн</label><input id="ws-deadline" name="deadline" type="date"></div>
+            <div class="field"><label for="ws-client">Заказчик</label><input id="ws-client" name="client" type="text" placeholder="Необязательно"></div>
+            <div class="field field--full"><label for="ws-next">Следующий шаг</label><textarea id="ws-next" name="next" rows="3" placeholder="Например: запросить ТУ и архитектурные планы"></textarea></div>
+          </div>
+          <div class="brief-form__actions"><button class="btn btn--primary" type="submit">Добавить проект</button><span data-workspace-status aria-live="polite"></span></div>
+        </form>
+      </aside>
+
+      <div>
+        <div class="workspace-toolbar">
+          <div class="field"><label for="ws-filter">Показать</label><select id="ws-filter" data-workspace-filter><option value="all">Все проекты</option><option value="active">В работе</option><option value="late">Просроченные</option><option value="done">Завершённые</option></select></div>
+          <div class="btn-row"><button class="btn btn--ghost" type="button" data-workspace-export>Экспорт CSV</button><button class="btn btn--ghost" type="button" data-workspace-clear>Очистить список</button></div>
+        </div>
+        <div class="workspace-list" data-workspace-list></div>
+        <p class="muted workspace-empty" data-workspace-empty hidden>Проектов пока нет. Добавьте первый объект слева.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer"><div class="container footer__inner"><span>© <span data-year>2026</span> Айдар Исаев · инженер ВК/НВК</span><a href="index.html">Вернуться на сайт</a></div></footer>
+</body>
+</html>

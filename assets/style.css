@@ -337,6 +337,32 @@ details[open] summary::after { content: "−"; }
 .page-head .lead { margin-bottom: 0; }
 .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 
+/* ===== Рабочее место ===== */
+.workspace-head { border-bottom: 1px solid var(--border); background: var(--surface); }
+.workspace-layout { display: grid; grid-template-columns: minmax(280px, .8fr) minmax(0, 1.4fr); gap: 24px; align-items: start; }
+.workspace-panel { display: grid; gap: 16px; }
+.workspace-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.workspace-summary div { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+.workspace-summary b { display: block; color: var(--accent); font: 700 1.35rem/1.2 var(--mono); }
+.workspace-summary span { color: var(--muted); font-size: .78rem; }
+.workspace-form { box-shadow: none; }
+.workspace-toolbar { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 16px; }
+.workspace-toolbar .field { width: 180px; }
+.workspace-item { padding: 16px; box-shadow: none; }
+.workspace-item + .workspace-item { margin-top: 10px; }
+.workspace-item--late { border-left: 4px solid var(--warn-border); }
+.workspace-item__top, .workspace-item__controls, .workspace-item__details { display: flex; gap: 12px; }
+.workspace-item__top { justify-content: space-between; align-items: start; }
+.workspace-item h3 { margin-bottom: .2em; font-size: 1rem; }
+.workspace-item p { margin: 0; font-size: .85rem; }
+.workspace-item select { max-width: 150px; padding: 7px 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font: inherit; font-size: .85rem; }
+.workspace-remove { width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--muted); cursor: pointer; font: 1.35rem/1 var(--font); }
+.workspace-remove:hover { color: #b42318; border-color: #b42318; }
+.workspace-item__details { border-top: 1px solid var(--border); margin-top: 12px; padding-top: 10px; color: var(--muted); font-size: .85rem; justify-content: space-between; }
+.workspace-empty { padding: 30px 0; text-align: center; }
+@media (max-width: 860px) { .workspace-layout { grid-template-columns: 1fr; } }
+@media (max-width: 620px) { .workspace-toolbar, .workspace-item__top, .workspace-item__details { align-items: stretch; flex-direction: column; } .workspace-toolbar .field { width: 100%; } .workspace-item__controls { justify-content: space-between; } }
+
 @media print {
   .header, .footer, .nav-toggle, .icon-btn { display: none !important; }
   body { background: #fff; color: #000; }
