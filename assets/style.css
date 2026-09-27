@@ -148,17 +148,22 @@ code { background: var(--surface-2); padding: .1em .35em; border-radius: 6px; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
 
 /* ===== Hero ===== */
-.hero { padding: 72px 0 56px; position: relative; overflow: hidden; }
-.hero::before {
-  content: ""; position: absolute; inset: -40% -20% auto auto; width: 620px; height: 620px;
-  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent), transparent 65%);
-  pointer-events: none;
+.hero {
+  padding: 72px 0 56px; position: relative; overflow: hidden;
+  background-color: #071521; background-image: url("hero-water-systems.png");
+  background-position: center; background-size: cover;
 }
 .hero__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; position: relative; }
 .hero__card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  background: rgba(8, 21, 35, .88); border: 1px solid rgba(216, 232, 246, .28); border-radius: var(--radius);
   box-shadow: var(--shadow); padding: 24px;
 }
+.hero h1 { color: #fff; }
+.hero .lead { color: rgba(242, 248, 252, .88); }
+.hero .eyebrow { color: #75dce7; }
+.hero .stat span { color: rgba(242, 248, 252, .74); }
+.hero .btn--ghost { background: rgba(8, 21, 35, .72); border-color: rgba(216, 232, 246, .45); color: #fff; }
+.hero .btn--ghost:hover { background: rgba(8, 21, 35, .92); }
 .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .stat b { display: block; font-size: 1.6rem; color: var(--accent); }
 .stat span { color: var(--muted); font-size: .9rem; }
