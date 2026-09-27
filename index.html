@@ -191,6 +191,61 @@
       </div>
     </div>
   </section>
+
+  <section class="section section--alt" id="brief">
+    <div class="container brief">
+      <div class="brief__intro">
+        <span class="eyebrow">Бриф</span>
+        <h2>Подготовьте запрос за минуту</h2>
+        <p class="lead">Укажите главное об объекте. Сайт соберёт текст, который удобно отправить в Telegram или по почте.</p>
+        <p class="muted">Чем точнее исходные данные, тем быстрее можно оценить объём работ и сроки.</p>
+      </div>
+      <form class="card brief-form" data-brief-form>
+        <div class="fields">
+          <div class="field">
+            <label for="brief-service">Нужная работа</label>
+            <select id="brief-service" name="service">
+              <option value="Раздел ВК">Раздел ВК</option>
+              <option value="Раздел НВК">Раздел НВК</option>
+              <option value="ВК и НВК">ВК и НВК</option>
+              <option value="Проверка документации">Проверка документации</option>
+              <option value="Расчёты и консультация">Расчёты и консультация</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="brief-stage">Стадия</label>
+            <select id="brief-stage" name="stage">
+              <option value="Нужно определить">Нужно определить</option>
+              <option value="Проектная документация">Проектная документация</option>
+              <option value="Рабочая документация">Рабочая документация</option>
+              <option value="Корректировка документации">Корректировка документации</option>
+            </select>
+          </div>
+          <div class="field field--full">
+            <label for="brief-object">Объект и город</label>
+            <input id="brief-object" name="object" type="text" placeholder="Например: жилой дом, Бишкек" autocomplete="off">
+          </div>
+          <div class="field field--full">
+            <label for="brief-task">Что нужно сделать</label>
+            <textarea id="brief-task" name="task" rows="3" placeholder="Исходные данные, сети, особенности объекта"></textarea>
+          </div>
+          <div class="field">
+            <label for="brief-deadline">Желаемый срок</label>
+            <input id="brief-deadline" name="deadline" type="text" placeholder="Например: до 15 октября" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="brief-contact">Как с вами связаться</label>
+            <input id="brief-contact" name="contact" type="text" placeholder="Телефон или Telegram" autocomplete="off">
+          </div>
+        </div>
+        <div class="brief-form__actions">
+          <button class="btn btn--primary" type="submit">Открыть Telegram</button>
+          <button class="btn btn--ghost" type="button" data-brief-copy>Скопировать текст</button>
+          <span class="brief-form__status" data-brief-status aria-live="polite"></span>
+        </div>
+      </form>
+    </div>
+  </section>
 </main>
 
 <footer class="footer">

@@ -247,6 +247,11 @@ td code { white-space: nowrap; }
   width: 100%; padding: 10px 12px; border-radius: 9px; border: 1px solid var(--border);
   background: var(--bg); color: var(--text); font: inherit; font-family: var(--mono);
 }
+.field textarea {
+  width: 100%; padding: 10px 12px; border-radius: 9px; border: 1px solid var(--border);
+  background: var(--bg); color: var(--text); font: inherit; resize: vertical;
+}
+.field textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .field--full { grid-column: 1 / -1; }
 .result {
   background: var(--surface-2); border-radius: 12px; padding: 16px; display: grid; gap: 8px; align-content: start;
@@ -285,6 +290,14 @@ details[open] summary::after { content: "−"; }
 .contact-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 .contact-list li { display: flex; gap: 12px; align-items: center; }
 .contact-list .card__icon { margin: 0; width: 38px; height: 38px; font-size: 1.05rem; flex: none; }
+
+/* ===== Бриф ===== */
+.brief { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 40px; align-items: start; }
+.brief__intro p:last-child { margin-bottom: 0; }
+.brief-form { box-shadow: none; }
+.brief-form__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
+.brief-form__status { color: var(--ok); font-size: .9rem; min-height: 1.5em; }
+@media (max-width: 760px) { .brief { grid-template-columns: 1fr; gap: 24px; } }
 
 /* ===== Футер ===== */
 .footer { border-top: 1px solid var(--border); padding: 32px 0; color: var(--muted); font-size: .9rem; }

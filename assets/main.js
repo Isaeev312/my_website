@@ -78,5 +78,40 @@
         });
       });
     });
+
+    // --- Бриф для нового запроса ---
+    const briefForm = document.querySelector("[data-brief-form]");
+    if (briefForm) {
+      const status = briefForm.querySelector("[data-brief-status]");
+      function briefText() {
+        const data = new FormData(briefForm);
+        const object = data.get("object").trim() || "не указан";
+        const task = data.get("task").trim() || "нужно обсудить";
+        const deadline = data.get("deadline").trim() || "не указан";
+        const contact = data.get("contact").trim() || "не указан";
+        return "Здравствуйте, Айдар!\n\nНужна работа: " + data.get("service") +
+          "\nСтадия: " + data.get("stage") +
+          "\nОбъект: " + object +
+          "\nЗадача: " + task +
+          "\nЖелаемый срок: " + deadline +
+          "\nКонтакт: " + contact;
+      }
+      briefForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const url = "https://t.me/isaev312?text=" + encodeURIComponent(briefText());
+        window.open(url, "_blank", "noopener");
+      });
+      const copyButton = briefForm.querySelector("[data-brief-copy]");
+      if (copyButton) copyButton.addEventListener("click", function () {
+        const text = briefText();
+        const copied = navigator.clipboard && navigator.clipboard.writeText
+          ? navigator.clipboard.writeText(text) : Promise.reject();
+        copied.then(function () {
+          status.textContent = "Текст скопирован";
+        }).catch(function () {
+          status.textContent = "Скопируйте текст через Telegram";
+        });
+      });
+    }
   });
 })();
